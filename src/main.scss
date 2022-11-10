@@ -25,11 +25,15 @@ button {
 }
 
 .gallery {
-    padding-top: 53px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-items: center;
-    align-items: center;
+    display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-gap: 20px;
+        padding-top: 75px;
+        margin: 0;
+        max-width: calc(100vw - 80px);
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
 }
 
 .is-hidden {
