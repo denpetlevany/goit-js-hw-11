@@ -1,9 +1,12 @@
 import './main.scss'
+
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import debounce from 'lodash.debounce';
 import axios from "axios";
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import { renderMarkup } from './renderMarkup';
+
 
 const searchFormRef = document.querySelector('#search-form');
 const submitBtnRef = document.querySelector('[type="submit"]')
@@ -16,8 +19,8 @@ let limit = 40;
 let disabled = false;
 let lightbox = new SimpleLightbox('.photo-card a', { captionDelay: 250, captionsData: 'alt', });
 
-const API_KEY = '26468279-bf2eb4cc1683868bd61313a75';
-const BASE_URL = 'https://pixabay.com/api/'
+const API_KEY = '31248055-e075bd58b7f60ee40b8d7aef1';
+const BASE_URL = 'https://pixabay.com/api/';
 
 async function getImg(name, page, limit) {
     try {
@@ -31,32 +34,6 @@ async function getImg(name, page, limit) {
     }
 };
 
-function renderMarkup(hits) {
-    const markup = hits.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
-        return `<div class="photo-card">
-                    <a href="${largeImageURL}">
-                    <img class="img-preview" src="${webformatURL}" alt="${tags}" loading="lazy" /> 
-                    </a>
-                    <div class="info">
-                        <p class="info-item">
-                                        <b>Likes <span>${likes}</span> </b>
-                        </p>
-                        <p class="info-item">
-                        <b>Views <span>${views}</span></b>
-                        </p>
-                        <p class="info-item">
-                        <b>Comments <span>${comments}</span></b>
-                        </p>
-                        <p class="info-item">
-                        <b>Downloads <span>${downloads}</span></b>
-                        </p>
-                    </div>
-                </div>`
-    }
-    ).join("");
-    galleryRef.insertAdjacentHTML("beforeend", markup);
-    lightbox.refresh();
-};
 
 galleryRef.addEventListener('click', e => e.preventDefault());
 
